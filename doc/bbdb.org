@@ -1,4 +1,5 @@
 #+MACRO: version 3.2.1
+#+MACRO: kbd @@texinfo:@kbd{$1}@@
 
 #+TITLE: Insidious Big Brother Database (BBDB) User Manual
 #+AUTHOR: Christian Egli
@@ -47,7 +48,7 @@ customizability makes it surprisingly powerful.
  [[http://melpa.milkbox.net/][MELPA]] contains very up-to-date packages for BBDB.
 
 1. Add MELPA as a package archive http://melpa.org/#/getting-started
-2. @@texinfo:@kbd{M-x package-install @key{RET} bbdb @key{RET}}@@
+2. {{{kbd(M-x package-install @key{RET} bbdb @key{RET})}}}
 
 ** From Source
 To build BBDB from source you will have to get it from
@@ -66,8 +67,8 @@ configure
 make elpa
 #+END_SRC
 
-Then inside your emacs install the package you just built using @@texinfo:@kbd{M-x
-package-install-file}@@.
+Then inside your emacs install the package you just built using
+{{{kbd(M-x package-install-file)}}}.
 
 For more advanced options see the ~README~ that comes with the source
 distribution of BBDB.
