@@ -1,90 +1,197 @@
-\input texinfo   @c -*-texinfo-*-
+\input texinfo    @c -*- texinfo -*-
 @c %**start of header
 @setfilename bbdb.info
 @settitle Insidious Big Brother Database (BBDB) User Manual
+@documentencoding UTF-8
+@documentlanguage en
+@syncodeindex pg cp
 @c %**end of header
 
 @copying
-This file documents the Insidious Big Brother Database (BBDB)
+This manual is for the Insidious Big Brother Database (BBDB) (version 3.2.1).
 
-Copyright (C) 2011-2015 Roland Winkler <winkler@@gnu.org>
+Copyright @copyright{} 2011-2015 Roland Winkler <winkler@@gnu.org>.
 
 @quotation
-Permission is granted to copy, distribute and/or modify this document
-under the terms of the GNU Free Documentation License, Version 1.3
-or any later version published by the Free Software Foundation;
-with the Invariant Section being ``GNU GENERAL PUBLIC LICENSE,''
-A copy of the license is included in the section entitled
-``GNU Free Documentation License.''
+Permission is granted to copy, distribute and/or modify this
+document under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free Software
+Foundation; with no Invariant Sections, with no Front-Cover Texts,
+and with no Back-Cover Texts.  A copy of the license is included in
+the section entitled "GNU Free Documentation License".
 @end quotation
 @end copying
 
 @dircategory Emacs misc features
 @direntry
-* BBDB: (bbdb).                 Insidious Big Brother Database (BBDB).
+* BBDB (bbdb).          Insidious Big Brother Database (BBDB).
 @end direntry
 
+@finalout
 @titlepage
 @title Insidious Big Brother Database (BBDB) User Manual
+@author Christian Egli
 @page
 @vskip 0pt plus 1filll
 @insertcopying
 @end titlepage
 
-@c Output the table of the contents at the beginning.
 @contents
 
 @ifnottex
-@node Top, First Chapter, (dir), (dir)
-@top BBDB User Manual
-
+@node Top
+@top Insidious Big Brother Database (BBDB) User Manual
 @insertcopying
 @end ifnottex
 
 @menu
-* First Chapter::               The first chapter is the only chapter
-                         in this sample.
+* Introduction::
+* Installation::
+* Adding contacts::
+* Editing records::
+* Searching contacts::
+* Exporting contacts::
+* Integrating with mail and news readers::
+* Customization::
+* GNU Free Documentation License::
+* Index::
 
-Appendices
-* Copying::                     The GNU General Public License gives you permission
-                         to redistribute GNU Emacs on certain terms;
-                         it also explains that there is no warranty.
-* GNU Free Documentation License::  The license for this documentation.
-* Index::                       Complete index.
+@detailmenu
+--- The Detailed Node Listing ---
 
+Installation
 
+* Via package manager::
+* From Source::
 
+Adding contacts
 
+* Snarfing::
+@end detailmenu
 @end menu
 
-@node First Chapter, Copying, Top, Top
-@chapter First Chapter
 
-@cindex chapter, first
 
-This is the first chapter.
-@cindex index entry, another
+@node Introduction
+@chapter Introduction
 
-Here is a numbered list.
+BBDB, which stands for Insidious Big Brother Database is an address
+book and contact management module for Emacs. BBDB can be integrated
+into mail and news readers, chat clients and other modules within
+Emacs. If you use BBDB to keep track of contact information, you'll be
+able to look up phone numbers or notes to people's records from your
+Emacs-based mail or from your org-mode documents. Even if you use bbdb
+simply as as a basic address book, you'll find that BBDB's
+customizability makes it surprisingly powerful.
+
+@node Installation
+@chapter Installation
+
+@menu
+* Via package manager::
+* From Source::
+@end menu
+
+@node Via package manager
+@section Via package manager
+
+The easiest way to install BBDB is via the builtin package manager.
+@uref{http://melpa.milkbox.net/,MELPA} contains very up-to-date packages for BBDB.
 
 @enumerate
 @item
-This is the first item.
-
+Add MELPA as a package archive @uref{http://melpa.org/#/getting-started}
 @item
-This is the second item.
+@kbd{M-x package-install @key{RET} bbdb @key{RET}}
 @end enumerate
 
+@node From Source
+@section From Source
 
-@node Copying, GNU Free Documentation License, First Chapter, Top
-@appendix GNU GENERAL PUBLIC LICENSE
-@include gpl.texi
+To build BBDB from source you will have to get it from
+@uref{http://savannah.nongnu.org/projects/bbdb/}. Check it out using git:
 
-@node GNU Free Documentation License, Index, Copying, Top
+@example
+git clone git://git.savannah.nongnu.org/bbdb.git
+@end example
+
+Then build it using the usual magic incantations:
+
+@example
+cd bbdb
+./autogen.sh
+configure
+make elpa
+@end example
+
+Then inside your Emacs install the package you just built using
+@kbd{M-x package-install-file}.
+
+For more advanced options see the @verb{~README~} that comes with the source
+distribution of BBDB.
+
+@node Adding contacts
+@chapter Adding contacts
+
+When you start bbdb for the first time with @kbd{M-x bbdb @key{RET}}
+you will have an empty address book. To add a contact type
+@kbd{c} in the @verb{~*BBDB*~} buffer. This will prompt for a name and
+several fields. You can then fill in the information or just hit
+@kbd{@key{RET}} when the corresponding field is empty. When asked
+for labels such as phone or address labels @kbd{@key{TAB}} will
+give you a completion list of existing labels.
+
+@verbatim
+Alyssa P. Hacker - MIT
+     address (work): 77 Massachusetts Ave
+                     Cambridge, MA 02139
+                     United States
+               mail: alyssa.p.hacker@mit.edu
+@end verbatim
+@menu
+* Snarfing::
+@end menu
+
+@node Snarfing
+@section Snarfing
+
+@node Editing records
+@chapter Editing records
+
+Say you realize that you forgot to add a URL to your contact Alyssa P.
+Hacker. So you go to your contact @kbd{M-x bbdb @key{RET} Alyssa @key{RET}}
+and type @kbd{i}. You will be prompted by a field name. Again
+@kbd{@key{TAB}} will give you a completion list of existing
+fields. Pick @verb{~url~} and enter the URL. You will end up with the
+following entry:
+
+@verbatim
+Alyssa P. Hacker - MIT
+     address (work): 77 Massachusetts Ave
+                     Cambridge, MA 02139
+                     United States
+               mail: alyssa.p.hacker@mit.edu
+                url: https://mitpress.mit.edu/books/structure-and-interpretation-computer-programs
+@end verbatim
+
+@node Searching contacts
+@chapter Searching contacts
+
+@node Exporting contacts
+@chapter Exporting contacts
+
+@node Integrating with mail and news readers
+@chapter Integrating with mail and news readers
+
+@node Customization
+@chapter Customization
+
+@node GNU Free Documentation License
 @appendix GNU Free Documentation License
+
 @include doclicense.texi
 
-@node Index,  , GNU Free Documentation License, Top
+@node Index
 @unnumbered Index
 
 @printindex cp

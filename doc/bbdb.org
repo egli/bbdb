@@ -32,7 +32,7 @@ and with no Back-Cover Texts.  A copy of the license is included in
 the section entitled "GNU Free Documentation License".
 #+END_QUOTE
 
-* Intro
+* Introduction
 BBDB, which stands for Insidious Big Brother Database is an address
 book and contact management module for Emacs. BBDB can be integrated
 into mail and news readers, chat clients and other modules within
@@ -67,15 +67,48 @@ configure
 make elpa
 #+END_SRC
 
-Then inside your emacs install the package you just built using
+Then inside your Emacs install the package you just built using
 {{{kbd(M-x package-install-file)}}}.
 
-For more advanced options see the ~README~ that comes with the source
+For more advanced options see the =README= that comes with the source
 distribution of BBDB.
 
 * Adding contacts
+When you start bbdb for the first time with {{{kbd(M-x bbdb @key{RET})}}}
+you will have an empty address book. To add a contact type
+{{{kbd(c)}}} in the =*BBDB*= buffer. This will prompt for a name and
+several fields. You can then fill in the information or just hit
+{{{kbd(@key{RET})}}} when the corresponding field is empty. When asked
+for labels such as phone or address labels {{{kbd(@key{TAB})}}} will
+give you a completion list of existing labels.
+
+#+BEGIN_EXAMPLE
+Alyssa P. Hacker - MIT
+     address (work): 77 Massachusetts Ave
+                     Cambridge, MA 02139
+                     United States
+               mail: alyssa.p.hacker@mit.edu
+#+END_EXAMPLE
+
 ** Snarfing
 * Editing records
+Say you realize that you forgot to add a URL to your contact Alyssa P.
+Hacker. So you go to your contact {{{kbd(M-x bbdb @key{RET} Alyssa @key{RET})}}}
+and type {{{kbd(i)}}}. You will be prompted by a field name. Again
+{{{kbd(@key{TAB})}}} will give you a completion list of existing
+fields. Pick =url= and enter the URL. You will end up with the
+following entry:
+
+#+BEGIN_EXAMPLE
+Alyssa P. Hacker - MIT
+     address (work): 77 Massachusetts Ave
+                     Cambridge, MA 02139
+                     United States
+               mail: alyssa.p.hacker@mit.edu
+                url: https://mitpress.mit.edu/books/structure-and-interpretation-computer-programs
+#+END_EXAMPLE
+
+
 * Searching contacts
 * Exporting contacts
 * Integrating with mail and news readers
